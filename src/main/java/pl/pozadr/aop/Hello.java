@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 public class Hello {
 
     @EventListener(ApplicationReadyEvent.class)
+    @AnnotationHelloAspect
     public String sayHello() {
         System.out.println("Hello!");
         return "Hello!";

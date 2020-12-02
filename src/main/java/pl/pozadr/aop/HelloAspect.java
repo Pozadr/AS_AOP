@@ -11,9 +11,32 @@ import org.springframework.stereotype.Component;
 @Component
 public class HelloAspect {
 
+    // USING ANNOTATION
+    // better solution -> better readability
+
+
+    @Around("@annotation(AnnotationHelloAspect)")
+    // without ProceedingJoinPoint method call instead execution method
+    private void beforeHello(ProceedingJoinPoint joinPoint) throws Throwable {
+        System.out.println("Around Hello!");
+        joinPoint.proceed();
+    }
+
+    @Before("@annotation(AnnotationHelloAspect)")
+    private void beforeHello() {
+        System.out.println("Before Hello!");
+    }
+
+    @After("@annotation(AnnotationHelloAspect)")
+    private void afterHello() {
+        System.out.println("After Hello!");
+    }
+
+
+    //  USING PATH
+    /*
     @Around("execution(String pl.pozadr.aop.Hello.sayHello())")
     // without ProceedingJoinPoint method call instead execution method
-    //
     private void beforeHello(ProceedingJoinPoint joinPoint) throws Throwable {
         System.out.println("Around Hello!");
         joinPoint.proceed();
@@ -27,6 +50,6 @@ public class HelloAspect {
     @After("execution(String pl.pozadr.aop.Hello.sayHello())")
     private void afterHello() {
         System.out.println("After Hello!");
-    }
+    }*/
 
 }
