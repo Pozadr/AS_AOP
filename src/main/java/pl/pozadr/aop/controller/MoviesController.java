@@ -7,6 +7,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.pozadr.aop.model.Movie;
 import pl.pozadr.aop.service.MoviesService;
+import pl.pozadr.aop.service.email.SendEmail;
 
 import java.util.List;
 
@@ -30,6 +31,7 @@ public class MoviesController {
     }
 
     @PostMapping("/add-movie")
+    @SendEmail
     public ResponseEntity<Movie> addMovie(@Validated @RequestBody Movie newMovie) {
         if (!moviesService.isIdUnique(newMovie)) {
             return new ResponseEntity("{\n\t\"id\": \"not unique.\"\n}", HttpStatus.BAD_REQUEST);
