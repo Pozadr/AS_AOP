@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface MovieService {
     boolean postMovie(MovieDTO newMovie);
+
     List<Movie> getMoviesList();
 }

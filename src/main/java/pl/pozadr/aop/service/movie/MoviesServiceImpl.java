@@ -10,12 +10,12 @@ import pl.pozadr.aop.repository.MovieRepositoryImpl;
 import java.util.List;
 
 @Service
-public class MoviesServiceImpl implements MovieService{
+public class MoviesServiceImpl implements MovieService {
     private final MovieRepositoryImpl movieRepository;
 
     @Autowired
     public MoviesServiceImpl(MovieRepositoryImpl repository) {
-       movieRepository = repository;
+        movieRepository = repository;
     }
 
     @Override

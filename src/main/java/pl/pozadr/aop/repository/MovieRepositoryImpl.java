@@ -1,14 +1,13 @@
 package pl.pozadr.aop.repository;
 
 import org.springframework.stereotype.Repository;
-import pl.pozadr.aop.dto.MovieDTO;
 import pl.pozadr.aop.model.Movie;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class MovieRepositoryImpl {
+public class MovieRepositoryImpl implements MovieRepository {
     private List<Movie> movies;
 
     public MovieRepositoryImpl() {
@@ -26,12 +25,12 @@ public class MovieRepositoryImpl {
         movies.add(new Movie(5L, "The Matrix", "Lilly Wachowski / Lana Wachowski ", 1999));
     }
 
-
+    @Override
     public List<Movie> getMoviesList() {
         return movies;
     }
 
-
+    @Override
     public boolean addMovie(Movie newMovie) {
         return movies.add(newMovie);
     }
