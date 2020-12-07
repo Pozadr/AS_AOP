@@ -44,6 +44,7 @@ public class MoviesServiceImpl implements MovieService {
 
     private Long getNextId() {
         List<Movie> movies = movieRepository.getMoviesList();
-        return (long) (movies.size() + 1);
+        Long lastId = movies.get(movies.size() - 1).getId();
+        return lastId + 1;
     }
 }
