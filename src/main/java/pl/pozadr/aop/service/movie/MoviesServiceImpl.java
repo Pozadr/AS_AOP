@@ -1,4 +1,4 @@
-package pl.pozadr.aop.service;
+package pl.pozadr.aop.service.movie;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +10,7 @@ import pl.pozadr.aop.repository.MovieRepositoryImpl;
 import java.util.List;
 
 @Service
-public class MoviesServiceImpl {
+public class MoviesServiceImpl implements MovieService{
     private final MovieRepositoryImpl movieRepository;
 
     @Autowired
@@ -18,12 +18,18 @@ public class MoviesServiceImpl {
        movieRepository = repository;
     }
 
-
+    @Override
     public boolean postMovie(MovieDTO newMovie) {
 
         Movie movieToAdd = mapMovieDTOtoMovie(newMovie);
         movieRepository.addMovie(movieToAdd);
         return true;
+    }
+
+
+    @Override
+    public List<Movie> getMoviesList() {
+        return movieRepository.getMoviesList();
     }
 
 
@@ -36,12 +42,7 @@ public class MoviesServiceImpl {
     }
 
 
-    public List<Movie> getMoviesList() {
-        return movieRepository.getMoviesList();
-    }
-
-
-    public Long getNextId() {
+    private Long getNextId() {
         List<Movie> movies = movieRepository.getMoviesList();
         return (long) (movies.size() + 1);
     }

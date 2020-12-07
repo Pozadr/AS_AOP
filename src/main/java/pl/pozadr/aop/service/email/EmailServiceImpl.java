@@ -1,7 +1,4 @@
-package pl.pozadr.aop.aspect;
-
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.Aspect;
+package pl.pozadr.aop.service.email;
 
 import com.sun.mail.smtp.SMTPTransport;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,9 +12,9 @@ import javax.mail.internet.MimeMessage;
 import java.util.Date;
 import java.util.Properties;
 
-@Aspect
+
 @Service
-public class EmailService {
+public class EmailServiceImpl implements EmailService {
     @Value("${send-email.smtp_server}")
     private String SMTP_SERVER;
     @Value("${send-email.smtp_port}")
@@ -37,7 +34,7 @@ public class EmailService {
     private String EMAIL_SUBJECT = "Test Send Email via SMTP";
     private String EMAIL_TEXT = "Hello! \n SPAM SPAM SPAM";
 
-    @After("@annotation(pl.pozadr.aop.aspect.SendEmail)")
+    @Override
     public void sendEmail() {
         Properties prop = System.getProperties();
         prop.put("mail.smtp.host", SMTP_SERVER); //optional, defined in SMTPTransport
