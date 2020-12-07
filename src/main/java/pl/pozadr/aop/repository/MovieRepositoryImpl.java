@@ -1,17 +1,23 @@
-package pl.pozadr.aop.service;
+package pl.pozadr.aop.repository;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
+import pl.pozadr.aop.dto.MovieDTO;
 import pl.pozadr.aop.model.Movie;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-@Service
-public class MoviesService {
+@Repository
+public class MovieRepositoryImpl {
     private List<Movie> movies;
 
-    public MoviesService() {
+    public MovieRepositoryImpl() {
+        movies = new ArrayList<>();
+        initializeRepository();
+    }
+
+
+    private void initializeRepository() {
         movies = new ArrayList<>();
         movies.add(new Movie(1L, "Fight Club", "David Fincher", 1999));
         movies.add(new Movie(2L, "The Fifth Element", "Luc Besson", 1997));
@@ -20,23 +26,14 @@ public class MoviesService {
         movies.add(new Movie(5L, "The Matrix", "Lilly Wachowski / Lana Wachowski ", 1999));
     }
 
-    public List<Movie> getMovies() {
+
+    public List<Movie> getMoviesList() {
         return movies;
     }
 
-    public void setMovies(List<Movie> movies) {
-        this.movies = movies;
-    }
 
     public boolean addMovie(Movie newMovie) {
-        movies.add(newMovie);
-        return true;
+        return movies.add(newMovie);
     }
 
-    public boolean isIdUnique(Movie movie) {
-        Optional<Movie> sameIdMovie = movies.stream()
-                .filter(mov -> mov.getId().equals(movie.getId()))
-                .findFirst();
-        return sameIdMovie.isEmpty();
-    }
 }

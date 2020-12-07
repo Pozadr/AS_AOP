@@ -1,4 +1,4 @@
-package pl.pozadr.aop.service.email;
+package pl.pozadr.aop.aspect;
 
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -37,7 +37,7 @@ public class EmailService {
     private String EMAIL_SUBJECT = "Test Send Email via SMTP";
     private String EMAIL_TEXT = "Hello! \n SPAM SPAM SPAM";
 
-    @After("@annotation(pl.pozadr.aop.service.email.SendEmail)")
+    @After("@annotation(pl.pozadr.aop.aspect.SendEmail)")
     public void sendEmail() {
         Properties prop = System.getProperties();
         prop.put("mail.smtp.host", SMTP_SERVER); //optional, defined in SMTPTransport
